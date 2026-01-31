@@ -1,0 +1,1034 @@
+<!DOCTYPE html>
+<html lang="ko" id="html-root">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ACE Platform - International Student Support System</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <div class="container">
+        <!-- Language Selector Modal -->
+        <div id="languageModal" class="language-modal" style="display: none;">
+            <div class="language-modal-content">
+                <div class="language-modal-header">
+                    <h3>🌐 Select Language / 언어 선택</h3>
+                    <button class="close-modal" onclick="closeLanguageModal()">✕</button>
+                </div>
+                <div class="language-grid">
+                    <div class="language-option" onclick="changeLanguage('ko')">
+                        <div class="language-flag">🇰🇷</div>
+                        <div class="language-name">한국어</div>
+                        <div class="language-english">Korean</div>
+                    </div>
+                    <div class="language-option" onclick="changeLanguage('en')">
+                        <div class="language-flag">🇺🇸</div>
+                        <div class="language-name">English</div>
+                        <div class="language-english">English</div>
+                    </div>
+                    <div class="language-option" onclick="changeLanguage('uz')">
+                        <div class="language-flag">🇺🇿</div>
+                        <div class="language-name">O'zbek</div>
+                        <div class="language-english">Uzbek</div>
+                    </div>
+                    <div class="language-option" onclick="changeLanguage('zh')">
+                        <div class="language-flag">🇨🇳</div>
+                        <div class="language-name">中文</div>
+                        <div class="language-english">Chinese</div>
+                    </div>
+                    <div class="language-option" onclick="changeLanguage('vi')">
+                        <div class="language-flag">🇻🇳</div>
+                        <div class="language-name">Tiếng Việt</div>
+                        <div class="language-english">Vietnamese</div>
+                    </div>
+                    <div class="language-option" onclick="changeLanguage('mn')">
+                        <div class="language-flag">🇲🇳</div>
+                        <div class="language-name">Монгол</div>
+                        <div class="language-english">Mongolian</div>
+                    </div>
+                    <div class="language-option" onclick="changeLanguage('si')">
+                        <div class="language-flag">🇱🇰</div>
+                        <div class="language-name">සිංහල</div>
+                        <div class="language-english">Sinhala</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="header">
+            <h1 data-i18n="platform_title">🎓 ACE 플랫폼</h1>
+            <p data-i18n="platform_subtitle">ACADEMICS · COMMUNITY · EMPLOYMENT</p>
+            <p style="font-size: 0.9em; margin-top: 10px;" data-i18n="platform_description">외국인 유학생 전주기 통합지원 시스템</p>
+        </div>
+
+        <div class="screen-selector">
+            <!-- Depth 1: Primary -->
+            <div class="screen-selector-row depth-1">
+                <button class="screen-btn depth-1-btn active" onclick="showScreen('main')">
+                    <span class="btn-icon">🏠</span>
+                    <span data-i18n="screen_main">메인</span>
+                </button>
+            </div>
+
+            <!-- Depth 2: Main Features -->
+            <div class="screen-selector-row depth-2">
+                <button class="screen-btn depth-2-btn" onclick="showScreen('diagnosis')">
+                    <span class="btn-icon">📝</span>
+                    <span data-i18n="screen_diagnosis">한국어 진단</span>
+                </button>
+                <button class="screen-btn depth-2-btn" onclick="showScreen('consultation')">
+                    <span class="btn-icon">👨‍💼</span>
+                    <span data-i18n="screen_consultation">전문가 상담</span>
+                </button>
+                <button class="screen-btn depth-2-btn" onclick="showScreen('job')">
+                    <span class="btn-icon">💼</span>
+                    <span data-i18n="screen_job">취업정보</span>
+                </button>
+                <button class="screen-btn depth-2-btn" onclick="showScreen('story')">
+                    <span class="btn-icon">🎓</span>
+                    <span data-i18n="screen_story">선배 스토리</span>
+                </button>
+                <button class="screen-btn depth-2-btn" onclick="showScreen('visa')">
+                    <span class="btn-icon">🛂</span>
+                    <span data-i18n="screen_visa">비자 계산기</span>
+                </button>
+            </div>
+
+            <!-- Depth 3: Sub Pages -->
+            <div class="screen-selector-row depth-3">
+                <button class="screen-btn depth-3-btn" onclick="showScreen('result')">
+                    <span class="btn-icon">📊</span>
+                    <span data-i18n="screen_result">진단 결과</span>
+                </button>
+                <button class="screen-btn depth-3-btn" onclick="showScreen('chatbot')">
+                    <span class="btn-icon">🤖</span>
+                    <span data-i18n="screen_chatbot">AI 상담</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="phone-frame">
+            <div class="phone-notch"></div>
+
+            <!-- Main Screen -->
+            <div class="screen active" id="main">
+                <div class="status-bar">
+                    <span id="current-time">9:41</span>
+                    <span>📶 📡 🔋</span>
+                </div>
+                <div class="app-header">
+                    <h2 data-i18n="platform_title">ACE 플랫폼</h2>
+                    <div class="lang-selector" onclick="openLanguageModal()">🌐 한국어 ▼</div>
+                </div>
+                <div class="content">
+                    <h3 class="section-title"><span data-i18n="section_academics">A-Academics (학업)</span></h3>
+                    <div class="main-grid">
+                        <div class="feature-card" onclick="showScreen('diagnosis')">
+                            <div class="feature-icon">📝</div>
+                            <div class="feature-title" data-i18n="feature_korean_test">한국어 진단</div>
+                            <div class="feature-desc" data-i18n="feature_korean_desc">레벨 테스트</div>
+                        </div>
+                        <div class="feature-card" onclick="showScreen('academic')">
+                            <div class="feature-icon">📚</div>
+                            <div class="feature-title" data-i18n="feature_topik">학교생활 안내</div>
+                            <div class="feature-desc" data-i18n="feature_topik_desc">학사 정보 안내</div>
+                        </div>
+                        <div class="feature-card" onclick="showScreen('portfolio')">
+                            <div class="feature-icon">💡</div>
+                            <div class="feature-title" data-i18n="feature_portfolio">학생 창작물</div>
+                            <div class="feature-desc" data-i18n="feature_portfolio_desc">우리의 작품집</div>
+                        </div>
+                    </div>
+
+                    <h3 class="section-title"><span data-i18n="section_community">C-Community (생활)</span></h3>
+                    <div class="main-grid">
+                        <div class="feature-card" onclick="showScreen('consultation')">
+                            <div class="feature-icon">👨‍💼</div>
+                            <div class="feature-title" data-i18n="feature_consultation">전문가 상담</div>
+                            <div class="feature-desc" data-i18n="feature_consultation_desc">담당자 직접 상담</div>
+                        </div>
+                        <div class="feature-card" onclick="showScreen('life')">
+                            <div class="feature-icon">🏠</div>
+                            <div class="feature-title" data-i18n="feature_ai">한국생활 안내</div>
+                            <div class="feature-desc" data-i18n="feature_ai_desc">주거·의료·법률</div>
+                        </div>
+                    </div>
+
+                    <h3 class="section-title"><span data-i18n="section_employment">E-Employment (진로)</span></h3>
+                    <div class="main-grid">
+                        <div class="feature-card" onclick="showScreen('recruitment')">
+                            <div class="feature-icon">💼</div>
+                            <div class="feature-title" data-i18n="feature_job_public">채용정보</div>
+                            <div class="feature-desc" data-i18n="feature_job_public_desc">실시간 채용정보</div>
+                        </div>
+                        <div class="feature-card" onclick="showScreen('job')">
+                            <div class="feature-icon">🏢</div>
+                            <div class="feature-title" data-i18n="feature_job_info">지역 취업정보</div>
+                            <div class="feature-desc" data-i18n="feature_job_desc">학교가족회사</div>
+                        </div>
+                        <div class="feature-card" onclick="showScreen('visa')">
+                            <div class="feature-icon">🛂</div>
+                            <div class="feature-title" data-i18n="feature_visa">F-2-R 비자</div>
+                            <div class="feature-desc" data-i18n="feature_visa_desc">점수 계산기</div>
+                        </div>
+                        <div class="feature-card" onclick="showScreen('story')">
+                            <div class="feature-icon">🎓</div>
+                            <div class="feature-title" data-i18n="feature_story">선배 스토리</div>
+                            <div class="feature-desc" data-i18n="feature_story_desc">취업 성공 사례</div>
+                        </div>
+                    </div>
+
+                    <div style="height: 80px;"></div>
+                </div>
+            </div>
+
+            <!-- Diagnosis Screen -->
+            <div class="screen" id="diagnosis">
+                <div class="status-bar">
+                    <span id="diagnosis-time">9:41</span>
+                    <span>📶 📡 🔋</span>
+                </div>
+                <div class="app-header" onclick="showScreen('main')" style="cursor: pointer;">
+                    <h2 data-i18n="diagnosis_title">← 한국어 레벨 진단</h2>
+                </div>
+                <div class="content">
+                    <div style="background: white; border-radius: 12px; padding: 20px; margin-bottom: 20px;">
+                        <h4 style="font-size: 18px; margin-bottom: 20px; color: #1e3c72; font-weight: 700;"
+                            data-i18n="diagnosis_step1">1️⃣ TOPIK 공식 기출문제 풀기</h4>
+
+                        <div class="test-option-card"
+                            onclick="window.open('https://www.topik.go.kr/TWSTDY/TWSTDY0080.do', '_blank')">
+                            <div class="test-option-icon">📝</div>
+                            <div class="test-option-content">
+                                <div class="test-option-title">TOPIK 공식 기출문제</div>
+                                <div class="test-option-desc">한국어능력시험 공식 홈페이지</div>
+                            </div>
+                            <div class="test-option-arrow">→</div>
+                        </div>
+
+                        <div class="test-option-card"
+                            onclick="window.open('https://www.sejonghakdang.org/sjcu/leveltest/levelguide.html#', '_blank')">
+                            <div class="test-option-icon">🎓</div>
+                            <div class="test-option-content">
+                                <div class="test-option-title">세종학당 레벨테스트</div>
+                                <div class="test-option-desc">세종학당재단 공식 레벨 테스트</div>
+                            </div>
+                            <div class="test-option-arrow">→</div>
+                        </div>
+
+                        <div class="test-option-card"
+                            onclick="window.open('https://nuri.iksi.or.kr/front/page/participation/onlineLevelTest/main.do?language=ko#', '_blank')">
+                            <div class="test-option-icon">💻</div>
+                            <div class="test-option-content">
+                                <div class="test-option-title">누리-세종학당 온라인</div>
+                                <div class="test-option-desc">온라인 한국어 레벨 테스트</div>
+                            </div>
+                            <div class="test-option-arrow">→</div>
+                        </div>
+                    </div>
+
+                    <div style="background: white; border-radius: 12px; padding: 15px;">
+                        <h4 style="font-size: 16px; margin-bottom: 15px;" data-i18n="diagnosis_step2">2️⃣ 결과 화면 업로드</h4>
+                        <div class="upload-area" id="uploadArea">
+                            <div class="upload-icon">📸</div>
+                            <div class="upload-text" data-i18n="upload_image">이미지를 여기에 붙여넣으세요</div>
+                            <div class="upload-text" style="font-size: 12px; color: #999;" data-i18n="upload_hint">(Ctrl
+                                + V)</div>
+                            <div style="margin: 15px 0; color: #999;" data-i18n="or_text">또는</div>
+                            <input type="file" id="fileInput" accept="image/*" style="display: none;">
+                            <button
+                                style="padding: 10px 20px; background: #f0f0f0; border: none; border-radius: 8px; cursor: pointer;"
+                                onclick="document.getElementById('fileInput').click()" data-i18n="select_file">파일
+                                선택</button>
+                        </div>
+
+                        <h4 style="font-size: 16px; margin: 25px 0 15px 0;" data-i18n="diagnosis_step3">3️⃣ 정보 입력</h4>
+                        <div class="input-group">
+                            <label data-i18n="test_type">시험 구분</label>
+                            <select id="topikLevel">
+                                <option>TOPIK I</option>
+                                <option selected>TOPIK II</option>
+                            </select>
+                        </div>
+
+                        <div class="input-group">
+                            <label data-i18n="total_score">총점</label>
+                            <input type="number" id="topikScore" data-i18n="score_placeholder" placeholder="점수를 입력하세요"
+                                value="180">
+                        </div>
+
+                        <button class="btn-primary" onclick="analyzeDiagnosis()" data-i18n="analyze_result">결과
+                            분석하기</button>
+                    </div>
+                    <div style="height: 80px;"></div>
+                </div>
+            </div>
+
+            <!-- Result Screen -->
+            <div class="screen" id="result">
+                <div class="status-bar">
+                    <span id="result-time">9:41</span>
+                    <span>📶 📡 🔋</span>
+                </div>
+                <div class="app-header" onclick="showScreen('main')" style="cursor: pointer;">
+                    <h2 data-i18n="result_title">← 진단 결과</h2>
+                </div>
+                <div class="content">
+                    <div class="result-card">
+                        <div style="font-size: 18px; opacity: 0.9;" data-i18n="current_level">현재 한국어 수준</div>
+                        <div class="result-level" id="resultLevel">TOPIK II - 4급</div>
+                        <div class="result-score" id="resultScore"><span data-i18n="total_score_label">총점</span>: 180점
+                        </div>
+                    </div>
+
+                    <div class="chart-container">
+                        <h4 style="margin-bottom: 15px;" data-i18n="growth_timeline">📈 성장 타임라인</h4>
+                        <canvas id="progressChart" style="max-height: 250px;"></canvas>
+                    </div>
+
+                    <div style="background: white; border-radius: 15px; padding: 20px; margin-bottom: 20px;">
+                        <h4 style="margin-bottom: 15px;" data-i18n="next_goal">💪 다음 목표까지</h4>
+                        <div id="nextGoal"
+                            style="font-size: 24px; font-weight: 700; color: #2a5298; text-align: center; padding: 20px 0;">
+                            5급 달성까지 20점 필요
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="progressFill" style="width: 80%;"></div>
+                        </div>
+                    </div>
+
+                    <div class="course-list">
+                        <h4 style="margin-bottom: 15px;" data-i18n="recommended_courses">📚 추천 강좌</h4>
+                        <div class="course-item">
+                            <div class="course-name">한국어 중급 II</div>
+                            <div class="course-type">한국문화교육센터</div>
+                        </div>
+                        <div class="course-item">
+                            <div class="course-name">대학생활과 글쓰기</div>
+                            <div class="course-type">교양 과목</div>
+                        </div>
+                        <div class="course-item">
+                            <div class="course-name">TOPIK 고급 대비반</div>
+                            <div class="course-type">온라인 강좌</div>
+                        </div>
+                        <button class="btn-primary" data-i18n="view_schedule">추천 시간표 보기</button>
+                    </div>
+                    <div style="height: 80px;"></div>
+                </div>
+            </div>
+
+            <!-- Other screens remain similar with data-i18n attributes added -->
+            <!-- For brevity, I'll add key screens -->
+
+            <!-- Consultation Screen -->
+            <div class="screen" id="consultation">
+                <div class="status-bar">
+                    <span id="consultation-time">9:41</span>
+                    <span>📶 📡 🔋</span>
+                </div>
+                <div class="app-header" onclick="showScreen('main')" style="cursor: pointer;">
+                    <h2 data-i18n="consultation_title">← 전문가 상담</h2>
+                </div>
+                <div class="content">
+                    <div style="background: white; border-radius: 15px; padding: 20px; margin-bottom: 20px;">
+                        <h4 style="margin-bottom: 15px;" data-i18n="select_category">카테고리 선택</h4>
+                        <div class="category-grid">
+                            <div class="category-card selected" data-category="학업">
+                                <div class="category-icon">📚</div>
+                                <div class="category-name" data-i18n="category_academic">학업</div>
+                            </div>
+                            <div class="category-card" data-category="생활">
+                                <div class="category-icon">🏠</div>
+                                <div class="category-name" data-i18n="category_life">생활</div>
+                            </div>
+                            <div class="category-card" data-category="진로">
+                                <div class="category-icon">💼</div>
+                                <div class="category-name" data-i18n="category_career">진로</div>
+                            </div>
+                            <div class="category-card" data-category="정서">
+                                <div class="category-icon">💭</div>
+                                <div class="category-name" data-i18n="category_emotion">정서</div>
+                            </div>
+                            <div class="category-card" data-category="행정">
+                                <div class="category-icon">📋</div>
+                                <div class="category-name" data-i18n="category_admin">행정</div>
+                            </div>
+                        </div>
+
+                        <div class="input-group">
+                            <label data-i18n="consultation_subject">제목</label>
+                            <input type="text" id="consultTitle" data-i18n="subject_placeholder"
+                                placeholder="상담 제목을 입력하세요">
+                        </div>
+
+                        <div class="input-group">
+                            <label data-i18n="consultation_content">내용</label>
+                            <textarea id="consultContent" data-i18n="content_placeholder"
+                                placeholder="상담 내용을 자세히 작성해주세요"></textarea>
+                        </div>
+
+                        <button class="btn-primary" onclick="submitConsultation()" data-i18n="submit">제출하기</button>
+                    </div>
+
+                    <div class="consultation-list">
+                        <h4 style="margin-bottom: 15px;" data-i18n="my_consultations">내 상담 내역 (3건)</h4>
+
+                        <div class="consultation-item">
+                            <div class="consultation-header">
+                                <div class="consultation-title">💬 수강신청 문의</div>
+                                <span class="status-badge status-completed" data-i18n="status_completed">✅ 답변완료</span>
+                            </div>
+                            <div style="font-size: 13px; color: #666;">2026.01.15</div>
+                        </div>
+
+                        <div class="consultation-item">
+                            <div class="consultation-header">
+                                <div class="consultation-title">💬 비자 연장 절차</div>
+                                <span class="status-badge status-processing" data-i18n="status_processing">🔄 확인중</span>
+                            </div>
+                            <div style="font-size: 13px; color: #666;">2026.01.16</div>
+                        </div>
+
+                        <div class="consultation-item">
+                            <div class="consultation-header">
+                                <div class="consultation-title">💬 장학금 신청</div>
+                                <span class="status-badge status-pending" data-i18n="status_pending">⏱️ 접수됨</span>
+                            </div>
+                            <div style="font-size: 13px; color: #666;">2026.01.17</div>
+                        </div>
+                    </div>
+                    <div style="height: 80px;"></div>
+                </div>
+            </div>
+
+            <!-- Job Screen -->
+            <div class="screen" id="job">
+                <div class="status-bar">
+                    <span id="job-time">9:41</span>
+                    <span>📶 📡 🔋</span>
+                </div>
+                <div class="app-header" onclick="showScreen('main')" style="cursor: pointer;">
+                    <h2>← 지역 내 취업정보</h2>
+                </div>
+                <div class="content">
+                    <div class="filter-bar">
+                        <div class="filter-row">
+                            <select id="regionFilter">
+                                <option selected>전체 지역</option>
+                                <option>지역1</option>
+                                <option>지역2</option>
+                                <option>지역3</option>
+                            </select>
+                            <select id="industryFilter">
+                                <option>전체 업종</option>
+                                <option>제조업</option>
+                                <option>서비스업</option>
+                            </select>
+                        </div>
+                        <div class="checkbox-group">
+                            <label><input type="checkbox" checked> 외국인 채용 가능만</label>
+                            <label><input type="checkbox" checked> 비자 스폰서 가능</label>
+                        </div>
+                    </div>
+
+                    <div style="margin-bottom: 15px; color: #666; font-size: 14px;">
+                        채용 공고 <strong style="color: #667eea;">23건</strong>
+                    </div>
+
+                    <div class="job-card">
+                        <div class="company-name">🏢 (주)ABC 전자</div>
+                        <div class="job-position">생산관리 담당자</div>
+                        <div class="job-location">📍 학교 인근 (도보 10분)</div>
+                        <div style="margin: 10px 0; color: #333;">💰 월 250만원 ~ 300만원</div>
+                        <div class="job-badges">
+                            <span class="badge badge-green">✅ 외국인 채용 가능</span>
+                            <span class="badge badge-blue">✅ E-7 비자 스폰서</span>
+                            <span class="badge badge-green">🏠 기숙사 제공</span>
+                        </div>
+                    </div>
+
+                    <div class="job-card">
+                        <div class="company-name">🏢 XYZ 물류</div>
+                        <div class="job-position">물류 관리</div>
+                        <div class="job-location">📍 시내 중심가 (대중교통 15분)</div>
+                        <div style="margin: 10px 0; color: #333;">💰 월 230만원 ~ 280만원</div>
+                        <div class="job-badges">
+                            <span class="badge badge-green">✅ 외국인 채용 가능</span>
+                            <span class="badge badge-blue">✅ 비자 스폰서</span>
+                        </div>
+                    </div>
+
+                    <div style="height: 80px;"></div>
+                </div>
+            </div>
+
+            <!-- Visa Screen -->
+            <div class="screen" id="visa">
+                <div class="status-bar">
+                    <span id="visa-time">9:41</span>
+                    <span>📶 📡 🔋</span>
+                </div>
+                <div class="app-header" onclick="showScreen('main')" style="cursor: pointer;">
+                    <h2>← F-2-R 비자 점수 계산기</h2>
+                </div>
+                <div class="content">
+                    <div class="calculator-form">
+                        <h4 style="margin-bottom: 15px;">기본 정보</h4>
+                        <div class="input-group">
+                            <label>나이</label>
+                            <input type="number" id="visaAge" placeholder="나이를 입력하세요" value="25">
+                        </div>
+                        <div class="input-group">
+                            <label>학력</label>
+                            <select id="visaEducation">
+                                <option>고졸</option>
+                                <option selected>학사</option>
+                                <option>석사</option>
+                                <option>박사</option>
+                            </select>
+                        </div>
+
+                        <h4 style="margin: 20px 0 15px 0;">언어 능력</h4>
+                        <div class="input-group">
+                            <label>TOPIK</label>
+                            <select id="visaTopik">
+                                <option>없음</option>
+                                <option>1급</option>
+                                <option>2급</option>
+                                <option>3급</option>
+                                <option selected>4급</option>
+                                <option>5급</option>
+                                <option>6급</option>
+                            </select>
+                        </div>
+
+                        <h4 style="margin: 20px 0 15px 0;">기타</h4>
+                        <div style="margin-bottom: 10px;">
+                            <label style="display: flex; align-items: center; font-size: 14px;">
+                                <input type="checkbox" id="visaProgram" checked style="margin-right: 8px; width: auto;">
+                                사회통합프로그램 이수
+                            </label>
+                        </div>
+                        <div style="margin-bottom: 20px;">
+                            <label style="display: flex; align-items: center; font-size: 14px;">
+                                <input type="checkbox" id="visaStay" checked style="margin-right: 8px; width: auto;">
+                                한국 체류 3년 이상
+                            </label>
+                        </div>
+
+                        <button class="btn-primary" onclick="calculateVisaScore()">점수 계산하기</button>
+                    </div>
+
+                    <div class="result-display">
+                        <div class="score-circle">
+                            <div class="score-number" id="visaScoreNumber">65</div>
+                            <div class="score-label">현재 점수</div>
+                        </div>
+                        <div style="font-size: 16px; color: #666; margin-bottom: 5px;">기준 점수: 80점</div>
+                        <div id="visaResultText" style="font-size: 24px; font-weight: 700; color: #f44336;">❌ 15점 부족
+                        </div>
+
+                        <div class="suggestions-box" id="suggestionBox">
+                            <div class="suggestions-title">💡 점수 올리는 방법</div>
+                            <div id="suggestionsList">
+                                <div class="suggestion-item">
+                                    <strong>TOPIK 5급 취득</strong>
+                                    <div style="font-size: 13px; color: #666; margin-top: 5px;">→ +5점 (현재 4급)</div>
+                                </div>
+                                <div class="suggestion-item">
+                                    <strong>TOPIK 6급 취득</strong>
+                                    <div style="font-size: 13px; color: #666; margin-top: 5px;">→ +10점 (현재 4급)</div>
+                                </div>
+                                <div class="suggestion-item">
+                                    <strong>석사 학위 취득</strong>
+                                    <div style="font-size: 13px; color: #666; margin-top: 5px;">→ +5점 (현재 학사)</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="height: 80px;"></div>
+                </div>
+            </div>
+
+            <!-- Chatbot Screen -->
+            <div class="screen" id="chatbot">
+                <div class="status-bar">
+                    <span id="chatbot-time">9:41</span>
+                    <span>📶 📡 🔋</span>
+                </div>
+                <div class="app-header" onclick="showScreen('main')" style="cursor: pointer;">
+                    <h2>← AI 상담</h2>
+                </div>
+                <div class="content">
+                    <div style="background: white; border-radius: 15px; padding: 15px; margin-bottom: 15px;">
+                        <div style="font-size: 13px; color: #666; margin-bottom: 10px;">자주 묻는 질문</div>
+                        <div class="tag-container">
+                            <div class="tag" onclick="sendQuickMessage('수강신청은 언제 하나요?')">📚 수강신청</div>
+                            <div class="tag" onclick="sendQuickMessage('학사 규정이 궁금합니다')">📋 학사 규정</div>
+                            <div class="tag" onclick="sendQuickMessage('장학금 신청 방법은?')">💰 장학금</div>
+                            <div class="tag" onclick="sendQuickMessage('졸업 요건이 무엇인가요?')">🎓 졸업 요건</div>
+                            <div class="tag" onclick="sendQuickMessage('성적은 언제 나오나요?')">📝 성적 처리</div>
+                        </div>
+                    </div>
+
+                    <div class="chat-container">
+                        <div class="chat-messages" id="chatMessages">
+                            <div class="message bot">
+                                <div class="message-bubble">
+                                    안녕하세요! 👋<br>
+                                    AI 학사 상담입니다.<br>
+                                    무엇을 도와드릴까요?
+                                </div>
+                            </div>
+                            <div class="message user">
+                                <div class="message-bubble">
+                                    수강신청은 언제 하나요?
+                                </div>
+                            </div>
+                            <div class="message bot">
+                                <div class="message-bubble">
+                                    2026학년도 1학기 수강신청 일정은 다음과 같습니다:<br><br>
+                                    📅 <strong>1차 수강신청</strong><br>
+                                    2026.2.5 (월) ~ 2.7 (수)<br><br>
+                                    📅 <strong>2차 수강신청</strong><br>
+                                    2026.2.19 (월) ~ 2.21 (수)<br><br>
+                                    외국인 유학생은 국제교류과에서 먼저 상담을 받으시기 바랍니다.
+                                </div>
+                            </div>
+                            <div class="message user">
+                                <div class="message-bubble">
+                                    감사합니다!
+                                </div>
+                            </div>
+                        </div>
+                        <div class="chat-input-container">
+                            <input type="text" id="chatInput" placeholder="메시지를 입력하세요..."
+                                onkeypress="handleChatEnter(event)">
+                            <button onclick="sendChatMessage()">전송</button>
+                        </div>
+                    </div>
+                    <div style="height: 80px;"></div>
+                </div>
+            </div>
+
+            <!-- Success Story Screen -->
+            <div class="screen" id="story">
+                <div class="status-bar">
+                    <span id="story-time">9:41</span>
+                    <span>📶 📡 🔋</span>
+                </div>
+                <div class="app-header" onclick="showScreen('main')" style="cursor: pointer;">
+                    <h2>← 선배 취업 스토리</h2>
+                </div>
+                <div class="content">
+                    <div
+                        style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 15px; padding: 20px; color: white; margin-bottom: 20px;">
+                        <h3 style="font-size: 18px; margin-bottom: 10px;">🎓 Success Story Hub</h3>
+                        <p style="font-size: 14px; opacity: 0.9;">선배들의 취업 성공 경험을 공유합니다</p>
+                    </div>
+
+                    <div style="display: flex; gap: 10px; margin-bottom: 20px; overflow-x: auto;">
+                        <button
+                            style="padding: 8px 16px; background: #667eea; color: white; border: none; border-radius: 20px; white-space: nowrap; cursor: pointer;">전체</button>
+                        <button
+                            style="padding: 8px 16px; background: #f0f0f0; color: #333; border: none; border-radius: 20px; white-space: nowrap; cursor: pointer;">제조업</button>
+                        <button
+                            style="padding: 8px 16px; background: #f0f0f0; color: #333; border: none; border-radius: 20px; white-space: nowrap; cursor: pointer;">서비스업</button>
+                        <button
+                            style="padding: 8px 16px; background: #f0f0f0; color: #333; border: none; border-radius: 20px; white-space: nowrap; cursor: pointer;">IT</button>
+                    </div>
+
+                    <!-- Story Card 1 -->
+                    <div
+                        style="background: white; border-radius: 15px; padding: 20px; margin-bottom: 15px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                        <div style="display: flex; align-items: center; margin-bottom: 15px;">
+                            <div
+                                style="width: 60px; height: 60px; border-radius: 50%; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); display: flex; align-items: center; justify-content: center; color: white; font-size: 24px; margin-right: 15px;">
+                                👨</div>
+                            <div>
+                                <div style="font-size: 16px; font-weight: 700; color: #333;">리웨이 (중국)</div>
+                                <div style="font-size: 13px; color: #666;">컴퓨터공학과 '23 졸업</div>
+                                <div style="font-size: 13px; color: #667eea;">현재: (주)ABC전자 생산관리</div>
+                            </div>
+                        </div>
+
+                        <div style="background: #f9f9f9; padding: 15px; border-radius: 10px; margin-bottom: 15px;">
+                            <h4 style="font-size: 14px; font-weight: 700; color: #333; margin-bottom: 10px;">💬 나의 취업 여정
+                            </h4>
+                            <p style="font-size: 13px; color: #666; line-height: 1.6;">
+                                처음 한국에 왔을 때는 한국어도 서툴고 취업은 꿈도 못 꿨어요. 하지만 TOPIK 6급을 따고, 현장실습을 통해 실무 경험을 쌓으면서 자신감을 얻었습니다.
+                                지금은 익산의 좋은 회사에서 일하며 F-2 비자도 받았어요!
+                            </p>
+                        </div>
+
+                        <div style="margin-bottom: 15px;">
+                            <h4 style="font-size: 14px; font-weight: 700; color: #333; margin-bottom: 10px;">📅 준비 타임라인
+                            </h4>
+                            <div style="border-left: 3px solid #667eea; padding-left: 15px;">
+                                <div style="margin-bottom: 12px;">
+                                    <div style="font-size: 12px; color: #667eea; font-weight: 600;">1학년</div>
+                                    <div style="font-size: 13px; color: #666;">TOPIK 4급 취득, 한국어 집중 학습</div>
+                                </div>
+                                <div style="margin-bottom: 12px;">
+                                    <div style="font-size: 12px; color: #667eea; font-weight: 600;">2학년</div>
+                                    <div style="font-size: 13px; color: #666;">전공 공부, IT 동아리 활동</div>
+                                </div>
+                                <div style="margin-bottom: 12px;">
+                                    <div style="font-size: 12px; color: #667eea; font-weight: 600;">3학년</div>
+                                    <div style="font-size: 13px; color: #666;">TOPIK 6급, 현장실습학기제 참여</div>
+                                </div>
+                                <div>
+                                    <div style="font-size: 12px; color: #667eea; font-weight: 600;">4학년</div>
+                                    <div style="font-size: 13px; color: #666;">자기소개서 작성, 면접 준비, 합격!</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="margin-bottom: 15px;">
+                            <h4 style="font-size: 14px; font-weight: 700; color: #333; margin-bottom: 10px;">💼 면접 경험담
+                            </h4>
+                            <div
+                                style="background: #FFF3E0; padding: 12px; border-radius: 8px; border-left: 4px solid #FF9800;">
+                                <div style="font-size: 13px; color: #666; margin-bottom: 8px;">
+                                    <strong>질문:</strong> "한국에서 계속 일하고 싶은 이유는?"
+                                </div>
+                                <div style="font-size: 13px; color: #666;">
+                                    <strong>답변:</strong> 익산에서 공부하며 이곳이 제 제2의 고향이 되었고, 배운 기술을 이 지역에서 활용하고 싶다고 답했습니다.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="margin-bottom: 15px;">
+                            <h4 style="font-size: 14px; font-weight: 700; color: #333; margin-bottom: 10px;">🛂 비자 전환 과정
+                            </h4>
+                            <div style="font-size: 13px; color: #666; line-height: 1.6;">
+                                D-2(유학) → D-10(구직) → E-7(특정활동)<br>
+                                <span style="color: #999;">총 소요 기간: 4개월</span><br>
+                                <strong style="color: #4CAF50;">✅ Tip:</strong> 회사의 비자 스폰서 지원을 미리 확인하세요!
+                            </div>
+                        </div>
+
+                        <div style="display: flex; gap: 8px;">
+                            <button
+                                style="flex: 1; padding: 12px; background: #667eea; color: white; border: none; border-radius: 10px; font-weight: 600; cursor: pointer;">💬
+                                질문하기</button>
+                            <button
+                                style="flex: 1; padding: 12px; background: #f0f0f0; color: #333; border: none; border-radius: 10px; font-weight: 600; cursor: pointer;">🙋
+                                멘토링 신청</button>
+                        </div>
+                    </div>
+
+                    <!-- Story Card 2 -->
+                    <div
+                        style="background: white; border-radius: 15px; padding: 20px; margin-bottom: 15px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                        <div style="display: flex; align-items: center; margin-bottom: 15px;">
+                            <div
+                                style="width: 60px; height: 60px; border-radius: 50%; background: linear-gradient(135deg, #FF6B9D 0%, #C06C84 100%); display: flex; align-items: center; justify-content: center; color: white; font-size: 24px; margin-right: 15px;">
+                                👩</div>
+                            <div>
+                                <div style="font-size: 16px; font-weight: 700; color: #333;">응우옌 (베트남)</div>
+                                <div style="font-size: 13px; color: #666;">경영학과 '22 졸업</div>
+                                <div style="font-size: 13px; color: #667eea;">현재: XYZ 물류 관리팀</div>
+                            </div>
+                        </div>
+
+                        <div style="background: #f9f9f9; padding: 15px; border-radius: 10px; margin-bottom: 15px;">
+                            <h4 style="font-size: 14px; font-weight: 700; color: #333; margin-bottom: 10px;">💬 나의 취업 여정
+                            </h4>
+                            <p style="font-size: 13px; color: #666; line-height: 1.6;">
+                                처음에는 언어 장벽이 가장 큰 어려움이었어요. 하지만 학교 멘토링 프로그램과 한국인 친구들의 도움으로 극복했습니다. 현장실습을 통해 만난 회사에서 정직원
+                                제안을 받았을 때는 정말 기뻤어요!
+                            </p>
+                        </div>
+
+                        <div style="margin-bottom: 15px;">
+                            <h4 style="font-size: 14px; font-weight: 700; color: #333; margin-bottom: 10px;">💡 후배들에게
+                                전하는 조언</h4>
+                            <div style="background: #E8F5E9; padding: 12px; border-radius: 8px;">
+                                <div style="font-size: 13px; color: #666; line-height: 1.6;">
+                                    ✅ 한국어는 빨리 시작할수록 좋아요<br>
+                                    ✅ 현장실습은 꼭 참여하세요<br>
+                                    ✅ 선배들과 네트워킹 많이 하세요<br>
+                                    ✅ 포기하지 말고 계속 도전하세요!
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="display: flex; gap: 8px;">
+                            <button
+                                style="flex: 1; padding: 12px; background: #667eea; color: white; border: none; border-radius: 10px; font-weight: 600; cursor: pointer;">💬
+                                질문하기</button>
+                            <button
+                                style="flex: 1; padding: 12px; background: #f0f0f0; color: #333; border: none; border-radius: 10px; font-weight: 600; cursor: pointer;">🙋
+                                멘토링 신청</button>
+                        </div>
+                    </div>
+
+                    <!-- Q&A Section -->
+                    <div style="background: white; border-radius: 15px; padding: 20px; margin-bottom: 20px;">
+                        <h4 style="font-size: 16px; font-weight: 700; color: #333; margin-bottom: 15px;">💬 최근 질문 & 답변
+                        </h4>
+
+                        <div style="border-bottom: 1px solid #e0e0e0; padding-bottom: 15px; margin-bottom: 15px;">
+                            <div style="font-size: 13px; color: #666; margin-bottom: 8px;">
+                                <strong style="color: #333;">Q:</strong> 비자 전환할 때 가장 어려웠던 점은?
+                            </div>
+                            <div style="font-size: 13px; color: #667eea; padding-left: 20px;">
+                                <strong>리웨이:</strong> 서류 준비가 복잡했어요. 회사 담당자와 긴밀히 소통하는 게 중요합니다.
+                            </div>
+                        </div>
+
+                        <div style="border-bottom: 1px solid #e0e0e0; padding-bottom: 15px; margin-bottom: 15px;">
+                            <div style="font-size: 13px; color: #666; margin-bottom: 8px;">
+                                <strong style="color: #333;">Q:</strong> 면접 준비는 어떻게 했나요?
+                            </div>
+                            <div style="font-size: 13px; color: #667eea; padding-left: 20px;">
+                                <strong>응우옌:</strong> 취업지원센터에서 모의면접을 3번 했어요. 정말 도움이 많이 됐습니다!
+                            </div>
+                        </div>
+
+                        <button class="btn-primary">더 많은 질문 보기</button>
+                    </div>
+
+                    <div style="height: 80px;"></div>
+                </div>
+            </div>
+
+            <!-- Academic Guide Screen -->
+            <div class="screen" id="academic">
+                <div class="status-bar">
+                    <span id="academic-time">9:41</span>
+                    <span>📶 📡 🔋</span>
+                </div>
+                <div class="app-header" onclick="showScreen('main')" style="cursor: pointer;">
+                    <h2>← 학교생활 안내</h2>
+                </div>
+                <div class="content">
+                    <div style="background: white; border-radius: 15px; padding: 20px; margin-bottom: 20px;">
+                        <h4 style="color: #2a5298; margin-bottom: 15px;">📅 주요 학사 일정 (2026-1)</h4>
+                        <div style="font-size: 14px; line-height: 1.8;">
+                            • 수강신청: 2월 5일 ~ 2월 7일<br>
+                            • 개강일: 3월 4일 (월)<br>
+                            • 수강정정: 3월 4일 ~ 3월 8일<br>
+                            • 중간고사: 4월 22일 ~ 4월 26일<br>
+                            • 기말고사: 6월 17일 ~ 6월 21일
+                        </div>
+                    </div>
+
+                    <div style="background: white; border-radius: 15px; padding: 20px; margin-bottom: 20px;">
+                        <h4 style="color: #2a5298; margin-bottom: 15px;">🎓 졸업 이수 요건</h4>
+                        <div style="font-size: 14px; line-height: 1.8;">
+                            • 교양 필수: 15학점 이상<br>
+                            • 전공 필수: 45학점 이상<br>
+                            • 총 이수학점: 130학점 이상<br>
+                            • TOPIK 4급 이상 취득 필수
+                        </div>
+                    </div>
+
+                    <div style="background: white; border-radius: 15px; padding: 20px; margin-bottom: 20px;">
+                        <h4 style="color: #2a5298; margin-bottom: 15px;">💰 장학금 정보</h4>
+                        <div style="font-size: 14px; line-height: 1.8;">
+                            • 성적 장학금 (GPA 3.5 이상)<br>
+                            • TOPIK 우수 장학금 (5급 이상)<br>
+                            • 근로 장학금 (교내 행정 지원)
+                        </div>
+                    </div>
+                    <div style="height: 80px;"></div>
+                </div>
+            </div>
+
+            <!-- Portfolio Screen -->
+            <div class="screen" id="portfolio">
+                <div class="status-bar">
+                    <span id="portfolio-time">9:41</span>
+                    <span>📶 📡 🔋</span>
+                </div>
+                <div class="app-header" onclick="showScreen('main')" style="cursor: pointer;">
+                    <h2 data-i18n="portfolio_title">← 학생 창작물</h2>
+                </div>
+                <div class="content">
+                    <div class="portfolio-intro">
+                        <p class="portfolio-subtitle" data-i18n="portfolio_subtitle">우리의 작품집</p>
+                        <p class="portfolio-desc" data-i18n="portfolio_intro_desc">바이브코딩으로 만든 우리들의 소중한 프로젝트를 공유하고 함께
+                            성장하는 공간입니다.</p>
+                    </div>
+
+                    <div class="upload-teaser">
+                        <div class="teaser-icon">💡</div>
+                        <div class="teaser-text">
+                            <h4 data-i18n="upload_your_work">나의 작품 업로드하기</h4>
+                            <p data-i18n="upload_desc">바이브코딩 프로젝트 링크를 공유해 주세요!</p>
+                        </div>
+                        <button class="btn-teaser" onclick="alert('업로드 기능은 준비 중입니다.')">+</button>
+                    </div>
+
+                    <div class="portfolio-grid">
+                        <div class="portfolio-item">
+                            <div class="portfolio-img"
+                                style="background-image: url('https://images.unsplash.com/photo-1543269865-cbf427effbad?w=400&auto=format&fit=crop&q=60');">
+                            </div>
+                            <div class="portfolio-info">
+                                <div class="portfolio-tag">학업</div>
+                                <h4 class="portfolio-item-title">한국어 학습 도우미</h4>
+                                <p class="portfolio-author">by 응우옌 반 훙 (베트남)</p>
+                            </div>
+                        </div>
+                        <div class="portfolio-item">
+                            <div class="portfolio-img"
+                                style="background-image: url('https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=400&auto=format&fit=crop&q=60');">
+                            </div>
+                            <div class="portfolio-info">
+                                <div class="portfolio-tag">생활</div>
+                                <h4 class="portfolio-item-title">대학로 맛집 지도</h4>
+                                <p class="portfolio-author">by 리웨이 (중국)</p>
+                            </div>
+                        </div>
+                        <div class="portfolio-item">
+                            <div class="portfolio-img"
+                                style="background-image: url('https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=400&auto=format&fit=crop&q=60');">
+                            </div>
+                            <div class="portfolio-info">
+                                <div class="portfolio-tag">진로</div>
+                                <h4 class="portfolio-item-title">K-Job 한국어 (자기소개서·면접)</h4>
+                                <p class="portfolio-author">by 아노 (우즈베키스탄)</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="height: 80px;"></div>
+                </div>
+            </div>
+
+            <!-- Life Guide Screen -->
+            <div class="screen" id="life">
+                <div class="status-bar">
+                    <span id="life-time">9:41</span>
+                    <span>📶 📡 🔋</span>
+                </div>
+                <div class="app-header" onclick="showScreen('main')" style="cursor: pointer;">
+                    <h2>← 한국생활 안내</h2>
+                </div>
+                <div class="content">
+                    <div class="main-grid">
+                        <div class="feature-card">
+                            <div class="feature-icon">🏠</div>
+                            <div class="feature-title">주거 정보</div>
+                            <div class="feature-desc">기숙사 및 자취방</div>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">🏥</div>
+                            <div class="feature-title">보험/의료</div>
+                            <div class="feature-desc">국민건강보험 안내</div>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">⚖️</div>
+                            <div class="feature-title">법률 지원</div>
+                            <div class="feature-desc">비자 및 노무 상담</div>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">🚌</div>
+                            <div class="feature-title">교통/은행</div>
+                            <div class="feature-desc">생활 편의 시설</div>
+                        </div>
+                    </div>
+
+                    <div style="background: #e3f2fd; border-radius: 15px; padding: 20px; margin-top: 20px;">
+                        <h4 style="color: #1976d2; margin-bottom: 10px;">🚨 긴급 연락처</h4>
+                        <div style="font-size: 14px;">
+                            • 범죄신고: 112<br>
+                            • 화재/구급: 119<br>
+                            • 출입국관리소: 1345
+                        </div>
+                    </div>
+                    <div style="height: 80px;"></div>
+                </div>
+            </div>
+
+            <!-- Recruitment Info Screen -->
+            <div class="screen" id="recruitment">
+                <div class="status-bar">
+                    <span id="recruitment-time">9:41</span>
+                    <span>📶 📡 🔋</span>
+                </div>
+                <div class="app-header" onclick="showScreen('main')" style="cursor: pointer;">
+                    <h2>← 실시간 채용정보</h2>
+                </div>
+                <div class="content">
+                    <div style="background: white; border-radius: 15px; padding: 15px; margin-bottom: 15px;">
+                        <h4 style="margin-bottom: 10px;">🔥 인기 키워드</h4>
+                        <div class="tag-container">
+                            <div class="tag">#사무직</div>
+                            <div class="tag">#제조업</div>
+                            <div class="tag">#IT개발</div>
+                            <div class="tag">#통번역</div>
+                            <div class="tag">#마케팅</div>
+                        </div>
+                    </div>
+
+                    <div class="job-card">
+                        <div class="company-name">🏢 글로벌 로지스틱스</div>
+                        <div class="job-position">해외 영업 지원 (베트남어 가능자)</div>
+                        <div class="job-location">📍 서울특별시 강남구</div>
+                        <div class="job-badges">
+                            <span class="badge badge-blue">신입/경력</span>
+                            <span class="badge badge-green">Visa 지원가능</span>
+                        </div>
+                    </div>
+
+                    <div class="job-card">
+                        <div class="company-name">🏢 테크 솔루션</div>
+                        <div class="job-position">웹 퍼블리셔 (인턴)</div>
+                        <div class="job-location">📍 경기도 성남시</div>
+                        <div class="job-badges">
+                            <span class="badge badge-blue">인턴</span>
+                            <span class="badge badge-green">F-2 비자 우대</span>
+                        </div>
+                    </div>
+
+                    <div class="job-card">
+                        <div class="company-name">🏢 한류 서비스</div>
+                        <div class="job-position">콘텐츠 기획 (중국어 권역)</div>
+                        <div class="job-location">📍 서울특별시 마포구</div>
+                        <div class="job-badges">
+                            <span class="badge badge-blue">경력 2년↑</span>
+                        </div>
+                    </div>
+                    <div style="height: 80px;"></div>
+                </div>
+            </div>
+
+            <!-- Bottom Navigation -->
+            <div class="bottom-nav">
+                <div class="nav-item" onclick="showScreen('main')">
+                    <div class="nav-icon">🏠</div>
+                    <div class="nav-label" data-i18n="nav_home">홈</div>
+                </div>
+                <div class="nav-item" onclick="showScreen('diagnosis')">
+                    <div class="nav-icon">📝</div>
+                    <div class="nav-label" data-i18n="nav_diagnosis">진단</div>
+                </div>
+                <div class="nav-item" onclick="showScreen('consultation')">
+                    <div class="nav-icon">👨‍💼</div>
+                    <div class="nav-label" data-i18n="nav_expert">전문가</div>
+                </div>
+                <div class="nav-item" onclick="showScreen('job')">
+                    <div class="nav-icon">💼</div>
+                    <div class="nav-label" data-i18n="nav_job">취업</div>
+                </div>
+                <div class="nav-item" onclick="showScreen('story')">
+                    <div class="nav-icon">🎓</div>
+                    <div class="nav-label" data-i18n="nav_story">스토리</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js/translations.js"></script>
+    <script src="js/main.js"></script>
+</body>
+
+</html>
